@@ -1,0 +1,33 @@
+{
+  "nodes":[
+    {"id":1,"name":"Labarre","group":1},
+    {"id":2,"name":"Valjean","group":1},
+    {"id":3,"name":"Mme.deR","group":1},
+    {"id":4,"name":"Isabeau","group":1},
+    {"id":5,"name":"Gervais","group":1},
+    {"id":6,"name":"Bamatabois","group":1},
+    {"id":7,"name":"Simplice","group":1},
+    {"id":8,"name":"Scaufflaire","group":1},
+    {"id":9,"name":"Woman1","group":1},
+    {"id":10,"name":"Judge","group":1},
+    {"id":11,"name":"Champmathieu","group":1},
+    {"id":12,"name":"Brevet","group":1},
+    {"id":13,"name":"Chenildieu","group":1},
+    {"id":14,"name":"Cochepaille","group":1}
+  ],
+  "links":[
+    {"source":1,"target":0,"value":1},
+    {"source":1,"target":2,"value":1},
+    {"source":1,"target":3,"value":1},
+    {"source":1,"target":4,"value":1},
+    {"source":1,"target":5,"value":1},
+    {"source":1,"target":6,"value":1},
+    {"source":1,"target":7,"value":1},
+    {"source":1,"target":8,"value":1},
+    {"source":2,"target":9,"value":1},
+    {"source":2,"target":10,"value":1},
+    {"source":2,"target":11,"value":1},
+    {"source":3,"target":12,"value":1},
+    {"source":3,"target":13,"value":1}
+  ]
+}
