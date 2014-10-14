@@ -68,12 +68,6 @@ d3.json("assets/scripts/nodes.json", function(error, graph) {
 			.attr("dy", "2em")
 			.style("text-anchor", "middle");
 
-
-
-
-	node.append("title")
-			.text(function(d) { return d.name + " - " + d.id; });
-
 	force.on("tick", tick);
 
 	function tick() {
