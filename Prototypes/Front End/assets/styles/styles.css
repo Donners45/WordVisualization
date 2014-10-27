@@ -1,13 +1,48 @@
-svg {
-	border: 3px dashed red;
+circle.node {
+	cursor: pointer;
+	stroke: #34495e;
+	stroke-width: 2px;
+	box-sizing: border-box;
+	stroke-location: inside;
 }
 
-.node {
-	stroke: #fff;
+line.link {
+	fill: none;
+	stroke: #34495e;
 	stroke-width: 1.5px;
 }
 
-.link {
-	stroke: #999;
-	stroke-opacity: .6;
+ul {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	display: block;
+	vertical-align: top;
+}
+
+span {
+	height: 12px;
+	width: 12px;
+	border: 2px solid #34495e;
+	display: inline-block;
+	margin-right: 10px;
+	border-radius: 100%;
+}
+
+.noun {
+	background: #e74c3c;
+}
+
+.verb {
+	background: #3498db;
+}
+
+.adjective {
+	background: #2ecc71;
+}
+
+.collapsed {
+	background: #95a5a6;
 }

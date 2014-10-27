@@ -1,86 +1,130 @@
-var width = 700,
-	height = 690;
 
-var color = d3.scale.category10();
+var w = 600,
+	h = 800,
+	radius = 10,
+	node,
+	link,
+	root;
 
 var force = d3.layout.force()
-		.charge(-1000)
-		.linkDistance(100)
-		.size([width, height]);
+	.on("tick", tick)
+	.charge(function(d) { return -500; })
+	.linkDistance(function(d) { return d.target._children ? 200 : 120; })
+	.size([w, h - 160]);
 
 var svg = d3.select("body").append("svg")
-		.attr("width", width)
-		.attr("height", height);
+	.attr("width", w)
+	.attr("height", h);
 
+d3.json("assets/scripts/nodes.json", function(json) {
+	root = json;
+	root.fixed = true;
+	root.x = w / 2;
+	root.y = h / 2 - 80;
+	update();
+});
 
-d3.json("assets/scripts/nodes.json", function(error, graph) {
+function update() {
+	var nodes = flatten(root),
+	links = d3.layout.tree().links(nodes);
+
+	// Restart the force layout.
 	force
-		.nodes(graph.nodes)
-		.links(graph.links)
+		.nodes(nodes)
+		.links(links)
 		.start();
 
+	// Update the links…
+	link = svg.selectAll("line.link")
+		.data(links, function(d) { return d.target.id; });
 
-	var node_drag = d3.behavior.drag()
-		.on("dragstart", dragstart)
-		.on("drag", dragmove)
-		.on("dragend", dragend);
+	// Enter any new links.
+	link.enter().insert("svg:line", ".node")
+		.attr("class", "link")
+		.attr("x1", function(d) { return d.source.x; })
+		.attr("y1", function(d) { return d.source.y; })
+		.attr("x2", function(d) { return d.target.x; })
+		.attr("y2", function(d) { return d.target.y; });
 
-	function dragstart(d, i) {
-		force.stop() // stops the force auto positioning before you start dragging
+	// Exit any old links.
+	link.exit().remove();
+
+	// Update the nodes…
+	node = svg.selectAll("circle.node")
+		.data(nodes, function(d) { return d.id; })
+		.style("fill", color)
+
+	node.transition()
+		.attr("r", radius);
+
+	// Enter any new nodes.
+	node.enter().append("svg:circle")
+		.attr("class", "node")
+		.attr("cx", function(d) { return d.x; })
+		.attr("cy", function(d) { return d.y; })
+		.attr("r", radius)
+		.style("fill", color)
+		.on("click", click)
+		.call(force.drag);
+
+	// Exit any old nodes.
+	node.exit().remove();
+}
+
+function tick() {
+	link.attr("x1", function(d) { return d.source.x; })
+		.attr("y1", function(d) { return d.source.y; })
+		.attr("x2", function(d) { return d.target.x; })
+		.attr("y2", function(d) { return d.target.y; });
+
+	node.attr("cx", function(d) { return d.x; })
+		.attr("cy", function(d) { return d.y; });
+}
+
+// Color leaf nodes orange, and packages white or blue.
+function color(d) {
+	if(d._children){
+		return "#95a5a6";
+	}else{
+		switch(d.group) {
+			case 'n':
+				return "#e74c3c";
+				break;
+			case 'v':
+				return "#3498db";
+				break;
+			case 'a':
+				return "#2ecc71";
+				break;
+			default:
+				return "#9b59b6";
+		}
+	}
+}
+
+// Toggle children on click.
+function click(d) {
+	if (d.children) {
+		d._children = d.children;
+		d.children = null;
+	} else {
+		d.children = d._children;
+		d._children = null;
+	}
+	update();
+}
+
+// Returns a list of all nodes under the root.
+function flatten(root) {
+	var nodes = [], i = 0;
+
+	function recurse(node) {
+		if (node.children) node.size = node.children.reduce(function(p, v) { return p + recurse(v); }, 0);
+		if (!node.id) node.id = ++i;
+		nodes.push(node);
+		return node.size;
 	}
 
-	function dragmove(d, i) {
-		d.px += d3.event.dx;
-		d.py += d3.event.dy;
-		d.x += d3.event.dx;
-		d.y += d3.event.dy; 
-		tick(); // this is the key to make it work together with updating both px,py,x,y on d !
-	}
-
-	function dragend(d, i) {
-		d.fixed = true; // of course set the node to fixed so the force doesn't include the node in its auto positioning stuff
-		tick();
-		force.resume();
-	}
-
-	var link = svg.selectAll(".link")
-			.data(graph.links)
-			.enter().append("line")
-			.attr("class", "link")
-			.style("stroke-width", function(d) {
-				return Math.sqrt(d.value);
-			});
-
-	var gnodes = svg.selectAll('g.gnode')
-			.data(graph.nodes)
-			.enter()
-			.append('g')
-			.classed('gnode', true)
-			.call(node_drag);
-
-	var node = gnodes.append("circle")
-			.attr("class", "node")
-			.attr("r", 10)
-			.style("fill", function(d) { return color(d.group); });
-
-	var labels = gnodes.append("text")
-			.text(function(d) {return d.name; })
-			.attr("dy", "2em")
-			.style("text-anchor", "middle");
-
-	force.on("tick", tick);
-
-	function tick() {
-		// Update the links
-		link.attr("x1", function(d) { return d.source.x; })
-			.attr("y1", function(d) { return d.source.y; })
-			.attr("x2", function(d) { return d.target.x; })
-			.attr("y2", function(d) { return d.target.y; });
-
-		gnodes.attr("transform", function(d) { 
-			return 'translate(' + [d.x, d.y] + ')'; 
-		});    
-
-	}
-
-});	
+	root.size = recurse(root);
+	return nodes;
+}
