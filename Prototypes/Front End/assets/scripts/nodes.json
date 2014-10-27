@@ -1,33 +1,76 @@
 {
-  "nodes":[
-    {"id":1,"name":"Labarre","group":1},
-    {"id":2,"name":"Valjean","group":1},
-    {"id":3,"name":"Mme.deR","group":2},
-    {"id":4,"name":"Isabeau","group":3},
-    {"id":5,"name":"Gervais","group":1},
-    {"id":6,"name":"Bamatabois","group":1},
-    {"id":7,"name":"Simplice","group":1},
-    {"id":8,"name":"Scaufflaire","group":1},
-    {"id":9,"name":"Woman1","group":1},
-    {"id":10,"name":"Judge","group":2},
-    {"id":11,"name":"Champmathieu","group":2},
-    {"id":12,"name":"Brevet","group":2},
-    {"id":13,"name":"Chenildieu","group":3},
-    {"id":14,"name":"Cochepaille","group":3}
-  ],
-  "links":[
-    {"source":1,"target":0,"value":1},
-    {"source":1,"target":2,"value":1},
-    {"source":1,"target":3,"value":1},
-    {"source":1,"target":4,"value":1},
-    {"source":1,"target":5,"value":1},
-    {"source":1,"target":6,"value":1},
-    {"source":1,"target":7,"value":1},
-    {"source":1,"target":8,"value":1},
-    {"source":2,"target":9,"value":1},
-    {"source":2,"target":10,"value":1},
-    {"source":2,"target":11,"value":1},
-    {"source":3,"target":12,"value":1},
-    {"source":3,"target":13,"value":1}
-  ]
+	"name":"bitter",
+	"group": "a",
+	"children":[
+		{
+			"name":"sorrowful",
+			"group": "a"
+		},
+		{
+			"name":"hostile",
+			"group": "a"
+		},
+		{
+			"name":"tasty",
+			"group": "a"
+		},
+		{
+			"name":"ale",
+			"group": "n"
+		},
+		{
+			"name":"change taste",
+			"group": "v"
+		},
+		{
+			"name":"acrimonious",
+			"group": "a"
+		},
+		{
+			"name":"biting",
+			"group": "a"
+		},
+		{
+			"name":"bitterness",
+			"group": "n"
+		},
+		{
+			"name":"taste",
+			"group": "a",
+			"children":[
+				{
+					"name":"caustic",
+					"group": "a"
+				},
+				{
+					"name":"virulent",
+					"group": "a"
+				},
+				{
+					"name":"blistering",
+					"group": "a"
+				},
+				{
+					"name":"sulfurous",
+					"group": "a"
+				},
+				{
+					"name":"acerb",
+					"group": "a"
+				},
+				{
+					"name":"acerbic",
+					"group": "a"
+				},
+				{
+					"name":"acid",
+					"group": "a"
+				},
+				{
+					"name":"acrid",
+					"group": "a"
+				}
+			]
+		}
+	]
 }
