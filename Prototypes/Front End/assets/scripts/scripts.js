@@ -20,6 +20,7 @@ var jsonURL = 'http://obscure-river-4096.herokuapp.com/word/bitter';
 // var jsonURL = 'assets/scripts/nodes2.json';
 
 d3.json(jsonURL, function(json) {
+	root = json.words[0]; //set root node
 	root.fixed = true;
 	root.x = w / 2;
 	root.y = h / 2 - 80;
