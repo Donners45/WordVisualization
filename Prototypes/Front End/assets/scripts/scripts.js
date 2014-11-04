@@ -1,5 +1,5 @@
 
-var w = 600,
+var w = 1000,
 	h = 800,
 	radius = 10,
 	node,
