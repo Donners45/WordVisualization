@@ -31,16 +31,20 @@ span {
 	border-radius: 100%;
 }
 
-.noun {
+.adverb {
 	background: #e74c3c;
 }
 
-.verb {
+.noun {
 	background: #3498db;
 }
 
-.adjective {
+.verb {
 	background: #2ecc71;
+}
+
+.adjective{
+	background: #e78229;
 }
 
 .collapsed {

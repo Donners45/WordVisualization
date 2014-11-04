@@ -90,14 +90,17 @@ function color(d) {
 		return "#95a5a6";
 	}else{
 		switch(d.group) {
-			case 'n':
+			case 'r': //adverb
 				return "#e74c3c";
 				break;
-			case 'v':
+			case 'n': //noun
 				return "#3498db";
 				break;
-			case 'a':
+			case 'v': //verb
 				return "#2ecc71";
+				break;
+			case 's': //adjective
+				return "#e78229";
 				break;
 			default:
 				return "#9b59b6";
