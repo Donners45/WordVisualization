@@ -16,8 +16,9 @@ var svg = d3.select("body").append("svg")
 	.attr("width", w)
 	.attr("height", h);
 
-d3.json("assets/scripts/nodes.json", function(json) {
-	root = json;
+var jsonURL = 'http://obscure-river-4096.herokuapp.com/word/bitter';
+
+d3.json(jsonURL, function(json) {
 	root.fixed = true;
 	root.x = w / 2;
 	root.y = h / 2 - 80;
