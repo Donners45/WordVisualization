@@ -72,6 +72,17 @@ function update() {
 
 	// Exit any old nodes.
 	node.exit().remove();
+
+	// Update the titles
+	title = svg.selectAll("text.title")    
+     	.data(nodes);
+
+    title.enter()
+    	.append("text") //In your code you used title instead of text
+    	.attr("class", "title")
+    	.text(function(d) { return d.name; });
+
+	title.exit().remove();
 }
 
 function tick() {
@@ -82,6 +93,9 @@ function tick() {
 
 	node.attr("cx", function(d) { return d.x; })
 		.attr("cy", function(d) { return d.y; });
+
+	title.attr("transform", function(d){ return "translate("+d.x+","+d.y+")"; });
+
 }
 
 // Color leaf nodes orange, and packages white or blue.
