@@ -3,29 +3,13 @@ html {
 }
 
 body {
-	@include rem(font-size, 1.6rem);
+	font-size: 16px;
 	font-family: Roboto, sans-serif;
 }
 
 h1 {
-	@include rem(font-size, 3.6rem);
+	font-size: 36px;
 	font-weight: 300;
-}
-
-h2 {
-	@include rem(font-size, 2.8rem);
-}
-
-h3 {
-	@include rem(font-size, 1.8rem);
-}
-
-h4 {
-	@include rem(font-size, 1.6rem);
-}
-
-p {
-	@include rem(font-size, 1.6rem);
 }
 
 .login {
