@@ -210,16 +210,16 @@ module.exports = function(grunt) {
 			}
 		},
 
-		uncss: {
-			dist: {
-				options: {
-					stylesheets: ['assets/styles/main.css']
-				},
-				files: {
-					'dist/assets/styles/main.css': ['dist/index.html']
-				}
-			}
-		},
+		// uncss: {
+		// 	dist: {
+		// 		options: {
+		// 			stylesheets: ['assets/styles/main.css']
+		// 		},
+		// 		files: {
+		// 			'dist/assets/styles/main.css': ['dist/index.html']
+		// 		}
+		// 	}
+		// },
 
 		'ftp-deploy': {
 			build: {
@@ -229,7 +229,7 @@ module.exports = function(grunt) {
 					authKey: 'key1'
 				},
 				src: 'dist/',
-				dest: '/public_html/forbearance'
+				dest: '/public_html/wordvisualization'
 			}
 		}
 
@@ -245,7 +245,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-ftp-deploy');
 	grunt.loadNpmTasks('grunt-csscomb');
-	grunt.loadNpmTasks('grunt-uncss');
+	// grunt.loadNpmTasks('grunt-uncss');
 
 	grunt.registerTask('server', [
 		'clean:dev',
@@ -263,7 +263,7 @@ module.exports = function(grunt) {
 		'imagemin:dist',
 		'processhtml',
 		'uglify',
-		'uncss'
+		// 'uncss'
 	]);
 
 	grunt.registerTask('ftp', [
