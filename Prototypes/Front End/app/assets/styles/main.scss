@@ -36,7 +36,7 @@ line.link {
 	stroke-width: 1.5px;
 }
 
-ul.nodekey {
+ul.node-key {
 	margin: 0;
 	padding: 0;
 	position: absolute;
@@ -96,6 +96,10 @@ span {
 		background: #34495e;
 		color: white;
 		display: block;
+
+		span {
+			cursor: pointer;
+		}
 	}
 
 	form {
@@ -141,6 +145,10 @@ span {
 	}
 }
 
+.hide {
+	display: none;
+}
+
 .overlay {
 	position: absolute;
 	top: 0;
@@ -149,4 +157,8 @@ span {
 	bottom :0;
 	background: rgba(0,0,0,0.5);
 	z-index: index($elements, overlay);
+}
+
+a {
+	cursor: pointer;
 }

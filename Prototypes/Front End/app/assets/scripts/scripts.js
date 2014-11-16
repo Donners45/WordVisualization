@@ -1,20 +1,23 @@
-var $wordToSearch
-
-$('#search-form').bind('submit', function(event) {
-	return false;
-});
-
-$('#search-submit').bind('click', function() {
-	$wordToSearch= $('#search-word').val();
-});
-
+var $wordToSearch = getUrlParameter('wordSearch');
 
 var w = 1000,
 	h = 800,
 	radius = 10,
 	node,
 	link,
-	root;
+	root,
+	title;
+	
+var jsonURL = 'http://obscure-river-4096.herokuapp.com/word/' + $wordToSearch;
+// var jsonURL = 'assets/scripts/nodes2.json'
+
+d3.json(jsonURL, function(json) {
+	root = json.words[0]; //set root node
+	root.fixed = true;
+	root.x = w / 2;
+	root.y = h / 2 - 80;
+	update();
+});
 
 var force = d3.layout.force()
 	.on("tick", tick)
@@ -25,17 +28,6 @@ var force = d3.layout.force()
 var svg = d3.select(".graph").append("svg")
 	.attr("width", w)
 	.attr("height", h);
-
-var jsonURL = 'http://obscure-river-4096.herokuapp.com/word/' + $wordToSearch;
-// var jsonURL = 'assets/scripts/nodes2.json';
-
-d3.json(jsonURL, function(json) {
-	root = json.words[0]; //set root node
-	root.fixed = true;
-	root.x = w / 2;
-	root.y = h / 2 - 80;
-	update();
-});
 
 function update() {
 	var nodes = flatten(root),
@@ -71,7 +63,8 @@ function update() {
 		.attr("r", radius);
 
 	// Enter any new nodes.
-	node.enter().append("svg:circle")
+	node.enter()
+		.append("svg:circle")
 		.attr("class", "node")
 		.attr("cx", function(d) { return d.x; })
 		.attr("cy", function(d) { return d.y; })
@@ -84,15 +77,18 @@ function update() {
 	node.exit().remove();
 
 	// Update the titles
-	title = svg.selectAll("text.title")    
-     	.data(nodes);
+	title = svg.selectAll("text.title")   
+		.data(nodes, function(d) { return d.id; })
 
+    //Enter titles
     title.enter()
-    	.append("text") //In your code you used title instead of text
+    	.append("text")
     	.attr("class", "title")
     	.text(function(d) { return d.name; });
-
+    	
+    //Remove old titles
 	title.exit().remove();
+
 }
 
 function tick() {
@@ -157,4 +153,36 @@ function flatten(root) {
 
 	root.size = recurse(root);
 	return nodes;
+
 }
+
+$('.login header span').click(function (){
+	hideSearch();
+});
+
+function showSearch() {
+	$('.login').removeClass('hide');
+	$('.overlay').removeClass('hide');
+}
+
+function hideSearch() {
+	$('.login').addClass('hide');
+	$('.overlay').addClass('hide');
+}
+
+function getUrlParameter(sParam)
+{
+    var sPageURL = window.location.search.substring(1);
+    var sURLVariables = sPageURL.split('&');
+    for (var i = 0; i < sURLVariables.length; i++) 
+    {
+        var sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] == sParam) 
+        {
+            if (sParameterName[1] != ''){
+            	hideSearch();
+            }
+            return sParameterName[1];
+        }
+    }
+} 
