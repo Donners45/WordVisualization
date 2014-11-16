@@ -1,3 +1,13 @@
+var $wordToSearch
+
+$('#search-form').bind('submit', function(event) {
+	return false;
+});
+
+$('#search-submit').bind('click', function() {
+	$wordToSearch= $('#search-word').val();
+});
+
 
 var w = 1000,
 	h = 800,
@@ -12,11 +22,11 @@ var force = d3.layout.force()
 	.linkDistance(function(d) { return d.target._children ? 200 : 120; })
 	.size([w, h - 160]);
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".graph").append("svg")
 	.attr("width", w)
 	.attr("height", h);
 
-var jsonURL = 'http://obscure-river-4096.herokuapp.com/word/bitter';
+var jsonURL = 'http://obscure-river-4096.herokuapp.com/word/' + $wordToSearch;
 // var jsonURL = 'assets/scripts/nodes2.json';
 
 d3.json(jsonURL, function(json) {

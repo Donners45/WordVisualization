@@ -1,0 +1,36 @@
+html {
+	font-size: 62.5%;
+}
+
+body {
+	@include rem(font-size, 1.6rem);
+	font-family: Roboto, sans-serif;
+}
+
+h1 {
+	@include rem(font-size, 3.6rem);
+	font-weight: 300;
+}
+
+h2 {
+	@include rem(font-size, 2.8rem);
+}
+
+h3 {
+	@include rem(font-size, 1.8rem);
+}
+
+h4 {
+	@include rem(font-size, 1.6rem);
+}
+
+p {
+	@include rem(font-size, 1.6rem);
+}
+
+.login {
+	h1 {
+		margin: 0;
+		padding: 0;
+	}
+}
