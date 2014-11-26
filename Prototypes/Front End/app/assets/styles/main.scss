@@ -164,6 +164,12 @@ a {
 }
 
 .d3-tip {
-    line-height: 1;
-    color: black;
+	display: inline-block;
+    color: white;
+    background: rgba(0,0,0,0.7);
+    border-radius: 30px;
+    padding: 0 20px;
+    height: 30px;
+    line-height: 30px;
+    position: relative;
 }
