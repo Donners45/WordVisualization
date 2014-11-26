@@ -1,0 +1,9 @@
+
+Directory contains all files needed to run the back end application locally
+
+: you will need to install python (3.0 +)
+: you will need to install flask
+
+After you have done that run app.py from the command line and it will run on 0.0.0.0:5000/
+
+Procfile and requierments files are needed for HEROKU hosting please do not alter. 
