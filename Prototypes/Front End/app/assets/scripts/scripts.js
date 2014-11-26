@@ -29,6 +29,14 @@ var svg = d3.select(".graph").append("svg")
 	.attr("width", w)
 	.attr("height", h);
 
+var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function (d) {
+    return  d.name + "";
+})
+svg.call(tip);
+
 function update() {
 	var nodes = flatten(root),
 	links = d3.layout.tree().links(nodes);
@@ -71,23 +79,12 @@ function update() {
 		.attr("r", radius)
 		.style("fill", color)
 		.on("click", click)
-		.call(force.drag);
+		.call(force.drag)
+		.on('mouseover', tip.show) //Added
+ 		.on('mouseout', tip.hide); //Added
 
 	// Exit any old nodes.
 	node.exit().remove();
-
-	// Update the titles
-	title = svg.selectAll("text.title")   
-		.data(nodes, function(d) { return d.id; })
-
-    //Enter titles
-    title.enter()
-    	.append("text")
-    	.attr("class", "title")
-    	.text(function(d) { return d.name; });
-    	
-    //Remove old titles
-	title.exit().remove();
 
 }
 
@@ -99,8 +96,6 @@ function tick() {
 
 	node.attr("cx", function(d) { return d.x; })
 		.attr("cy", function(d) { return d.y; });
-
-	title.attr("transform", function(d){ return "translate("+d.x+","+d.y+")"; });
 
 }
 
