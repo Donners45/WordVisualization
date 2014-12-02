@@ -224,7 +224,7 @@ module.exports = function(grunt) {
 		'ftp-deploy': {
 			build: {
 				auth: {
-					host: 'bleepyevans.com',
+					host: 'ftp.bleepyevans.com',
 					port: 21,
 					authKey: 'key1'
 				},
