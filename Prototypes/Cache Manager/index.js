@@ -13,15 +13,10 @@ function getWordResponse(word, fn) {
 
 	request(url, function(error, response, body){
 			if (!error){
-			
-				myCache.set(word, JSON.parse(body), function( err, success ){
-					if( !err && success ){
-					console.log( success );
-						}
-					});
+				myCache.set(word, JSON.parse(body));
 				fn(body);
 			}else{
-				console.log('fail');
+				console.log('Error whilst requesting server data');
 			}
 		});
 	}
@@ -32,11 +27,11 @@ function getWordResponse(word, fn) {
 	var value =  myCache.get(wordValue);
 	
 	if (Object.keys(value).length > 0) {
-		console.log('cache');
+		console.log('cached value : ' + wordValue);
 		res.send(value[wordValue]);
 	}else{
-	console.log('live');
-		getWordResponse((req.params.word), function(getWord){
+	console.log('live value : ' + wordValue);
+		getWordResponse((wordValue), function(getWord){
 			res.send(JSON.parse(getWord));
 		});
 	}
