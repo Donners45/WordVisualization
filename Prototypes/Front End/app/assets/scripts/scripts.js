@@ -32,8 +32,9 @@ var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
     .html(function (d) {
-    return  d.name + "";
-})
+	    return  d.word + "";
+	})
+
 svg.call(tip);
 
 function update() {
