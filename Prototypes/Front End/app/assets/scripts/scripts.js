@@ -2,7 +2,6 @@ var $wordToSearch = getUrlParameter('wordSearch');
 
 var w = 1000,
 	h = 800,
-	radius = 10,
 	node,
 	link,
 	root,
@@ -120,6 +119,16 @@ function color(d) {
 			default:
 				return "#9b59b6";
 		}
+	}
+}
+
+function radius(d) {
+	switch(d.identifier) {
+		case 'word-hypernym': //adverb
+			return "20";
+			break;
+		default:
+			return "10";
 	}
 }
 
