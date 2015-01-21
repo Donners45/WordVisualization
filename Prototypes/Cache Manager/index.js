@@ -22,7 +22,7 @@ function getWordResponse(word, fn) {
 	}
 
 
-  function respond(req, res, next) {  
+  function requestGraphData(req, res, next) {  
 	var wordValue = req.params.word;
 	var value =  myCache.get(wordValue);
 	
@@ -39,11 +39,68 @@ function getWordResponse(word, fn) {
 
 }
 
+function getData(word, fn){
+	
+	var key = myCache.get(word);
+	
+		if (Object.keys(key).length > 0) {
+		fn(key[word]);
+	}else{
+		getWordResponse((word), function(getWord){
+			key = myCache.get(word);
+			fn(key[word]);	
+		});
+	}
+}
+
+function highlightData(req, res, next) {
+
+	getData(req.params.word, function(result) { 
+		var data = result;
+		var offset = req.params.offset;
+	
+		var setParentVisible = false;
+		
+		for  (var i = 0; i < data.words[0].children.length; i++){
+			setParentVisible = false;
+			
+			if (data.words[0].children[i].children.length  == 0){
+			
+				data.words[0].children[i].visible = 'false';
+			
+			}else{
+			
+				for (var x = 0; x < data.words[0].children[i].children.length; x++){
+		
+						if  (data.words[0].children[i].children[x].offset != offset){
+							
+							data.words[0].children[i].children[x].visible = 'false';
+						}else{
+							setParentVisible = true;
+						}
+				}	
+			
+			if (setParentVisible == false) {
+				data.words[0].children[i].visible = 'false';
+			}
+			
+			}
+		}
+		
+		res.send(data);
+		
+	});
+	
+		next();
+
+	
+}
 
 var server = restify.createServer();
 server.use(restify.fullResponse());
-server.get('/word/:word', respond);
-server.head('/word/:word', respond);
+server.get('/word/:word', requestGraphData);
+server.head('/word/:word', requestGraphData);
+server.get('/offset/:offset/word/:word', highlightData);
 
 var port = process.env.PORT || 5000;
 server.listen(port, function() {
