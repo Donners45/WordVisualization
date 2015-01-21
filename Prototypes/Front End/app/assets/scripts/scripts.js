@@ -8,7 +8,7 @@ var w = 1000,
 	root,
 	title;
 	
-var jsonURL = 'http://obscure-river-4096.herokuapp.com/word/' + $wordToSearch;
+var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
 // var jsonURL = 'assets/scripts/nodes2.json'
 
 d3.json(jsonURL, function(json) {
