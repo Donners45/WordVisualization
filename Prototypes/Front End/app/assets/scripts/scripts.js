@@ -33,8 +33,10 @@ function d3JSON(jsonURL) {
 
 var force = d3.layout.force()
 	.on("tick", tick)
-	.charge(function(d) { return -500; })
-	.linkDistance(function(d) { return d.target._children ? 200 : 120; })
+	.charge(-700)
+	.gravity(0.1)
+	.friction(0.9)
+	.linkDistance(100)
 	.size([w, h - 160]);
 
 var svg = d3.select(".graph").append("svg")
