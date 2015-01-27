@@ -21,7 +21,7 @@ function click(d) {
 }
 
 function d3JSON(jsonURL) {
-		d3.json(jsonURL, function(json) {
+	d3.json(jsonURL, function(json) {
 
 		root = json.words[0]; //set root node
 		root.fixed = true;
