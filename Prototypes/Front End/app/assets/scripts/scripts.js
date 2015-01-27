@@ -9,6 +9,17 @@ var w = 1000,
 	
 var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
 d3JSON(jsonURL);
+
+// Toggle children on click.
+function click(d) {
+	if(d.clickable == "true"){
+		$offsetClicked = d.offset;
+		$group = d.group;
+		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch;
+		d3JSON(jsonURL);
+	}
+}
+
 function d3JSON(jsonURL) {
 		d3.json(jsonURL, function(json) {
 
@@ -133,18 +144,6 @@ function radius(d) {
 		default:
 			return "10";
 	}
-}
-
-// Toggle children on click.
-function click(d) {
-	if (d.children) {
-		d._children = d.children;
-		d.children = null;
-	} else {
-		d.children = d._children;
-		d._children = null;
-	}
-	update();
 }
 
 // Returns a list of all nodes under the root.
