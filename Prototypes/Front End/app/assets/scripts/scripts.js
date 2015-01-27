@@ -8,6 +8,7 @@ var w = 1000,
 	title;
 	
 var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
+d3JSON(jsonURL);
 function d3JSON(jsonURL) {
 		d3.json(jsonURL, function(json) {
 
