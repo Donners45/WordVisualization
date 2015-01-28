@@ -8,28 +8,14 @@ var w = 1000,
 	title;
 	
 var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
-d3JSON(jsonURL);
 
-// Toggle children on click.
-function click(d) {
-	if(d.clickable == "true"){
-		$offsetClicked = d.offset;
-		$group = d.group;
-		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch;
-		d3JSON(jsonURL);
-	}
-}
-
-function d3JSON(jsonURL) {
-	d3.json(jsonURL, function(json) {
-
-		root = json.words[0]; //set root node
-		root.fixed = true;
-		root.x = w / 2;
-		root.y = h / 2 - 80;
-		update();
-	});
-}
+d3.json(jsonURL, function(json) {
+	root = json.words[0]; //set root node
+	root.fixed = true;
+	root.x = w / 2;
+	root.y = h / 2 - 80;
+	update();
+});
 
 var force = d3.layout.force()
 	.on("tick", tick)
@@ -58,6 +44,11 @@ var tip = d3.tip()
 
 svg.call(tip);
 
+
+
+
+
+//Update the graph
 function update() {
 	var nodes = flatten(root),
 	links = d3.layout.tree().links(nodes);
@@ -118,10 +109,18 @@ function tick() {
 
 	node.attr("cx", function(d) { return d.x; })
 		.attr("cy", function(d) { return d.y; });
-
 }
 
-// Color leaf nodes orange, and packages white or blue.
+
+
+
+
+
+/***********************
+*** CUSTOM FUNCTIONS ***
+***********************/
+
+//Change the color of the nodes based off their group
 function color(d) {
 	if(d._children){
 		return "#95a5a6";
@@ -145,6 +144,17 @@ function color(d) {
 	}
 }
 
+//Request extended JSON objects when clicking a clickable node
+function click(d) {
+	if(d.clickable == "true"){
+		$offsetClicked = d.offset;
+		$group = d.group;
+		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch;
+		updateGraph(jsonURL);
+	}
+}
+
+//Change the opacity of the node depending on the whether its visible or not.
 function opacity(d) {
 	if(d.visible == "true"){
 		return "1";
@@ -153,6 +163,7 @@ function opacity(d) {
 	}
 }
 
+//Changes the radius of the circle based of the identifier
 function radius(d) {
 	switch(d.identifier) {
 		case 'word-hypernym': //adverb
@@ -178,6 +189,29 @@ function flatten(root) {
 	return nodes;
 
 }
+
+
+//Update graph with new extended JSON objects
+function updateGraph(newURL) {
+	d3.json(newURL, function(json) {
+		root = json.words[0]; //set root node
+		root.fixed = true;
+		root.x = w / 2;
+		root.y = h / 2 - 80;
+		update();
+	});
+}
+
+
+
+
+
+
+
+
+/********************
+****** SEARCH *******
+********************/
 
 $('.login header span').click(function (){
 	hideSearch();
