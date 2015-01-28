@@ -1,6 +1,6 @@
 var $wordToSearch = getUrlParameter('wordSearch');
 
-var w = 1000,
+var w = 800,
 	h = 800,
 	node,
 	link,
@@ -22,13 +22,14 @@ var force = d3.layout.force()
 	.charge(-700)
 	.gravity(0.1)
 	.friction(0.9)
-	.linkDistance(100)
+	.linkDistance(50)
 	.size([w, h - 160]);
 
 var svg = d3.select(".graph").append("svg")
 	.attr("width", w)
 	.attr("height", h);
 
+//Create tool tips
 var tip = d3.tip()
     .attr('class', 'd3-tip')
     .offset([-10, 0])
@@ -40,7 +41,7 @@ var tip = d3.tip()
     	}else{
     		return $nodeWord;
     	}
-	})
+	});
 
 svg.call(tip);
 
@@ -159,7 +160,7 @@ function opacity(d) {
 	if(d.visible == "true"){
 		return "1";
 	}else{
-		return "0.5";
+		return "0.25";
 	}
 }
 
