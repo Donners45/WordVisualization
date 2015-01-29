@@ -10,6 +10,8 @@ var w = 800,
 	
 var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
 
+jsonTextArea(jsonURL);
+
 d3.json(jsonURL, function(json) {
 	root = json.words[0]; //set root node
 	root.fixed = true;
@@ -191,9 +193,16 @@ function updateGraph(newURL) {
 		root.x = w / 2;
 		root.y = h / 2 - 80;
 		update();
+	 	jsonTextArea(newURL);
 	});
 }
 
+//Add json to textarea
+function jsonTextArea(newURL){
+	$.getJSON(newURL, function(data) {
+		$('#jsonCode').html(JSON.stringify(data, null, 4));
+	});
+}
 
 
 
