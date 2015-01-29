@@ -91,7 +91,6 @@ function update() {
 		.attr("cy", function(d) { return d.y; })
 		.attr("r", radius)
 		.style("fill", color)
-		.style("opacity", opacity)
 		.on("click", click)
 		.call(force.drag)
 		.on('mouseover', tip.show) //Added
@@ -155,12 +154,6 @@ function click(d) {
 	}
 }
 
-//Change the opacity of the node depending on the whether its visible or not.
-function opacity(d) {
-	if(d.visible == "true"){
-		return "1";
-	}else{
-		return "0.25";
 	}
 }
 
