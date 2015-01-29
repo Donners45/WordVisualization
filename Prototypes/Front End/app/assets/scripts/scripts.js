@@ -39,7 +39,7 @@ var tip = d3.tip()
     .html(function (d) {
 		var $nodeWord = d.word;    	
     	if($nodeWord.indexOf("_") > 0){
-    		$newNodeWord = $nodeWord.replace("_", " ");
+    		$newNodeWord = $nodeWord.replace(/_/g, ' ');
     		return $newNodeWord;
     	}else{
     		return $nodeWord;
