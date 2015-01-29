@@ -5,7 +5,8 @@ var w = 800,
 	node,
 	link,
 	root,
-	title;
+	title
+	previousOffset = 0;
 	
 var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
 
@@ -149,11 +150,8 @@ function click(d) {
 	if(d.clickable == "true"){
 		$offsetClicked = d.offset;
 		$group = d.group;
-		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch;
-		updateGraph(jsonURL);
-	}
-}
-
+		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch + '/parent/' + previousOffset;
+		previousOffset = $offsetClicked;
 	}
 }
 
