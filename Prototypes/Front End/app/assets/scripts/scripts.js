@@ -154,6 +154,7 @@ function click(d) {
 		$group = d.group;
 		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch + '/parent/' + previousOffset;
 		previousOffset = $offsetClicked;
+		updateGraph(jsonURL);
 	}
 }
 
