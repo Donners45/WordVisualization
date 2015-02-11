@@ -96,8 +96,13 @@ function update() {
 		.style("fill", color)
 		.on("click", click)
 		.call(force.drag)
-		.on('mouseover', tip.show) //Added
- 		.on('mouseout', tip.hide); //Added
+		.on('mouseout', function(d){
+			tip.hide(d);
+		})
+		.on('mouseover', function(d){
+			tip.show(d);
+			examples(d);
+		});
 
 	// Exit any old nodes.
 	node.exit().remove();
@@ -117,11 +122,17 @@ function tick() {
 
 
 
-
-
 /***********************
 *** CUSTOM FUNCTIONS ***
 ***********************/
+
+function examples(d) {
+	$('.examples').empty();
+	$.each(d.examples, function( key, value ) {
+		$('.examples').append("<li>" + toTitleCase(value.example) + "</li>");
+	});
+}
+
 
 //Change the color of the nodes based off their group
 function color(d) {
@@ -203,6 +214,10 @@ function jsonTextArea(newURL){
 	$.getJSON(newURL, function(data) {
 		$('#jsonCode').html(JSON.stringify(data, null, 4));
 	});
+}
+
+function toTitleCase(str){
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
 

@@ -80,3 +80,36 @@ span {
 	position: relative;
 	text-transform:capitalize;
 }
+
+.examples {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border: 1px solid black;
+	width: 400px;
+	text-align: left;
+	font-size: 11px;
+
+	li {
+		display: block;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid black;
+		padding: 5px;
+
+		&:last-child {
+			border: none;
+		}
+
+		&:nth-child(even) {
+			background: white;
+		}
+
+		&:nth-child(odd) {
+			background: #fafafa;
+		}
+	}
+}
