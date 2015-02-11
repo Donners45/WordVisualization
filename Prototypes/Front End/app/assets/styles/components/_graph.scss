@@ -1,0 +1,82 @@
+
+circle.node {
+	cursor: pointer;
+	stroke: #34495e;
+	stroke-width: 2px;
+	box-sizing: border-box;
+	stroke-location: inside;
+}
+
+line.link {
+	fill: none;
+	stroke: #34495e;
+	stroke-width: 1.5px;
+}
+
+ul.node-key {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 20px;
+	text-align: left;
+	left: 20px;
+
+	li {
+		display: block;
+		vertical-align: top;
+	}
+}
+
+span {
+	height: 12px;
+	width: 12px;
+	border: 2px solid #34495e;
+	display: inline-block;
+	margin-right: 10px;
+	border-radius: 100%;
+}
+
+.adverb {
+	background: #e74c3c;
+}
+
+.noun {
+	background: #3498db;
+}
+
+.verb {
+	background: #2ecc71;
+}
+
+.adjective{
+	background: #e78229;
+}
+
+.collapsed {
+	background: #95a5a6;
+}
+
+.graph-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.graph {
+	display: block;
+
+	svg {
+		display: block;
+	}
+}
+
+.d3-tip {
+	display: inline-block;
+	color: white;
+	background: rgba(0,0,0,0.7);
+	border-radius: 30px;
+	padding: 0 20px;
+	height: 30px;
+	line-height: 30px;
+	position: relative;
+	text-transform:capitalize;
+}

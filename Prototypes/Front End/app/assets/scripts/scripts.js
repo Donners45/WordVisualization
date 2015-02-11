@@ -1,7 +1,7 @@
 var $wordToSearch = getUrlParameter('wordSearch');
 
-var w = 800,
-	h = 800,
+var w = 960,
+	h = 960,
 	node,
 	link,
 	root,
@@ -26,7 +26,7 @@ var force = d3.layout.force()
 	.gravity(0.1)
 	.friction(0.9)
 	.linkDistance(50)
-	.size([w, h - 160]);
+	.size([w, h]);
 
 var svg = d3.select(".graph").append("svg")
 	.attr("width", w)

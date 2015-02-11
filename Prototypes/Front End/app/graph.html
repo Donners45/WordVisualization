@@ -6,15 +6,39 @@
 	<title>Title</title>
 	<link href="assets/styles/main.css" media="screen" rel="stylesheet" type="text/css" />
 </head>
-<body class="index">
+<body>
 
 	<div class="container">
-		<div class="inner">
-			<img src="assets/images/logo.png" />
-			<form id="search-form" method="get" action="graph.html">
+
+		<header>
+			<a href="index.html" class="logo">
+				<img src="assets/images/logo.png" width="90" height"90"/>
+			</a>
+			<form id="search-form" method="get">
 				<input id="search-word" type="text" name="wordSearch" placeholder="Word to search for ..." />
 				<input id="search-submit" type="submit" value="Search" />
 			</form>
+		</header>
+
+		<nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<li><a href="">Favourites</a></li>
+				<li><a href="">Print</a></li>
+				<li><a href="">Settings</a></li>
+			</ul>
+		</nav>
+
+		<div class="graph-container">
+
+			<ul class="node-key">
+				<li><span class="noun"></span>Noun</li>
+				<li><span class="verb"></span>Verb</li>
+				<li><span class="adjective"></span>Adjective</li>
+				<li><span class="adverb"></span>Adjverb</li>
+			</ul>
+
+			<div class="graph"></div>
 		</div>
 	</div>
 
