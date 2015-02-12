@@ -160,13 +160,13 @@ function color(d) {
 
 //Request extended JSON objects when clicking a clickable node
 function click(d) {
-	if(d.clickable == "true"){
-		$offsetClicked = d.offset;
-		$group = d.group;
-		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch + '/parent/' + previousOffset;
-		previousOffset = $offsetClicked;
-		updateGraph(jsonURL);
-	}
+	$offsetClicked = d.offset;
+	$group = d.group;
+	$wordClicked = d.word;
+	var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordClicked;
+	console.log(jsonURL);
+	previousOffset = $offsetClicked;
+	updateGraph(jsonURL);
 }
 
 //Changes the radius of the circle based of the identifier
