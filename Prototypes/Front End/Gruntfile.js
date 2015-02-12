@@ -202,7 +202,8 @@ module.exports = function(grunt) {
 		processhtml: {
 			dist: {
 				files: {
-					'dist/index.html': ['app/index.html']
+					'dist/index.html': ['app/index.html'],
+					'dist/graph.html': ['app/graph.html']
 				}
 			}
 		},
