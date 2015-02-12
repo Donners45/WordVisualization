@@ -243,7 +243,7 @@ module.exports = function(grunt) {
 					authKey: 'key1'
 				},
 				src: 'dist/',
-				dest: '/public_html/wordvisualization_basic'
+				dest: '/public_html/wordvisualization'
 			}
 		}
 

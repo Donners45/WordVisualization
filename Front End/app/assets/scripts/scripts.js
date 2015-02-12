@@ -8,7 +8,7 @@ var w = 960,
 	title
 	previousOffset = 0;
 	
-var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/basic' + $wordToSearch;
+var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
 
 jsonTextArea(jsonURL);
 
@@ -161,12 +161,9 @@ function color(d) {
 //Request extended JSON objects when clicking a clickable node
 function click(d) {
 	if(d.clickable == "true"){
-		console.log('clicked');
 		$offsetClicked = d.offset;
-		$wordClicked = d.word;
 		$group = d.group;
-		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/basic' + $wordClicked;
-		console.log('New jsonURL: ' + jsonURL);
+		var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/offset/' + $offsetClicked + '/pos/' + d.group + '/word/' + $wordToSearch + '/parent/' + previousOffset;
 		previousOffset = $offsetClicked;
 		updateGraph(jsonURL);
 	}
