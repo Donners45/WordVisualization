@@ -18,6 +18,7 @@ d3.json(jsonURL, function(json) {
 	root.x = w / 2;
 	root.y = h / 2 - 80;
 	update();
+	saveItem($wordToSearch);
 });
 
 var force = d3.layout.force()
@@ -217,13 +218,14 @@ function updateGraph(newURL) {
 var breadcrumbArray = [];
 
 function refresh(){
-	results.innerHTML = '';
+	breadcrumb.innerHTML = '';
 
 	if  (localStorage.getItem('testObject') !== null) {
 		breadcrumbArray =  JSON.parse(localStorage.getItem('testObject'));
 
 		for (var i = 0; i < breadcrumbArray.length; i++) {
-			results.innerHTML += '<li class="list-group-item" style="background-color: #333;">' + breadcrumbArray[i] + ' </li>';
+			var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + breadcrumbArray[i] 
+			breadcrumb.innerHTML += '<li>' + breadcrumbArray[i] + '</li>';
 		}	
 	}
 	
@@ -276,4 +278,8 @@ function getUrlParameter(sParam)
             return sParameterName[1];
         }
     }
-} 
+} } 
+
+$('#search-submit').click(function(){
+	localStorage.removeItem('testObject');
+});

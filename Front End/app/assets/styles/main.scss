@@ -84,3 +84,29 @@ input {
 	display: table-cell;
 	vertical-align: middle;
 }
+
+ul#breadcrumb {
+	padding: 5px;
+	list-style-type: none;
+	text-align: center;
+	margin:10px;
+	@include border-radius(100px);
+	background: #004b9a;
+	text-align: left;
+
+	li {
+		display: inline;
+	}
+
+	a {
+		text-decoration: none;
+		font-family:Arial;
+		padding: 5px 20px;
+		color: #fff;
+
+		&:hover {
+			color: #000084;
+			background-color: #fff;
+		}
+	}
+}
