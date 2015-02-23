@@ -105,7 +105,7 @@ function update() {
 	nodeG.append("text")
     	.attr("dy", 10 + 15)
     	.attr("text-anchor", "middle")
-    	.text(function(d) { return d.word });
+    	.text(function(d) { return correctlyFormat(d.word) });
 
     node.exit().remove();
 
@@ -130,18 +130,16 @@ function tick() {
 function examples(d) {
 	$('.examples').empty();
 	$.each(d.examples, function( key, value ) {
-		$('.examples').append("<li>" + toTitleCase(value.example) + "</li>");
+		$('.examples').append("<li>" + correctlyFormat(value.example) + "</li>");
 	});
 }
 
-function findNodeWord(d) {
-	var $nodeWord = d.word;    	
-	if($nodeWord.indexOf("_") > 0){
-		$newNodeWord = $nodeWord.replace(/_/g, ' ');
-		return $newNodeWord;
-	}else{
-		return $nodeWord;
+function correctlyFormat(word) {
+	if(word.indexOf("_") > 0){
+		word = word.replace(/_/g, ' ');
 	}
+
+	return word.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
 
 
@@ -202,20 +200,6 @@ function jsonTextArea(newURL){
 	$.getJSON(newURL, function(data) {
 		$('#jsonCode').html(JSON.stringify(data, null, 4));
 	});
-}
-
-function toTitleCase(str){
-    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-}
-
-function findNodeWord(d) {
-	var $nodeWord = d.word;    	
-	if($nodeWord.indexOf("_") > 0){
-		$newNodeWord = $nodeWord.replace(/_/g, ' ');
-		return $newNodeWord;
-	}else{
-		return $nodeWord;
-	}
 }
 
 //Update graph with new extended JSON objects
