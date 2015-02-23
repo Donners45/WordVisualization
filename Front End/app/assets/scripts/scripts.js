@@ -80,26 +80,34 @@ function update() {
 
 	// Update the nodes…
 	node = svg.selectAll(".node")
-		.data(nodes)
-		.enter().append("g")
+		.data(nodes);
+    
+    var nodeE = node
+		.enter();
+    
+    var nodeG = nodeE.append("g")
 		.attr("class", "node")
-		.call(force.drag)
+		.call(force.drag);
+
+	nodeG.append("circle")	
+		.attr("r", 10)
+		.on("click", click)
 		.on('mouseout', function(d){
 			tip.hide(d);
 		})
 		.on('mouseover', function(d){
 			tip.show(d);
 			examples(d);
-		});
-
-	node.append("circle")	
-		.attr("r", 10)
+		})
+		.call(force.drag)
 		.style("fill", color);
 
-	node.append("text")
+	nodeG.append("text")
     	.attr("dy", 10 + 15)
     	.attr("text-anchor", "middle")
-    	.text(findNodeWord);
+    	.text(function(d) { return d.word });
+
+    node.exit().remove();
 
 }
 
@@ -198,6 +206,28 @@ function jsonTextArea(newURL){
 
 function toTitleCase(str){
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
+
+function findNodeWord(d) {
+	var $nodeWord = d.word;    	
+	if($nodeWord.indexOf("_") > 0){
+		$newNodeWord = $nodeWord.replace(/_/g, ' ');
+		return $newNodeWord;
+	}else{
+		return $nodeWord;
+	}
+}
+
+//Update graph with new extended JSON objects
+function updateGraph(newURL) {
+	d3.json(newURL, function(json) {
+		root = json.words[0]; //set root node
+		root.fixed = true;
+		root.x = w / 2;
+		root.y = h / 2 - 80;
+		update();
+	 	jsonTextArea(newURL);
+	});
 }
 
 var breadcrumbArray = [];
