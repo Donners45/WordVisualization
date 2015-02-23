@@ -178,6 +178,8 @@ function click(d) {
 	previousOffset = $offsetClicked;
 	updateGraph(jsonURL);
 	saveItem(d.word);
+	var newURL = $.query.set("wordSearch", d.word).toString();
+	window.history.pushState("", "", newURL);
 }
 
 // Returns a list of all nodes under the root.
