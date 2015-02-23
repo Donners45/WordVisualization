@@ -1,15 +1,22 @@
 
-circle.node {
+.node {
 	cursor: pointer;
-	stroke: #34495e;
-	stroke-width: 2px;
-	box-sizing: border-box;
-	stroke-location: inside;
+
+	circle{
+		stroke: #34495e;
+		stroke-width: 2px;
+		box-sizing: border-box;
+		stroke-location: inside;
+	}
+
+	text {
+		font-size: 11px;
+	}
 }
 
 line.link {
 	fill: none;
-	stroke: #34495e;
+	stroke: #bbb;
 	stroke-width: 1.5px;
 }
 

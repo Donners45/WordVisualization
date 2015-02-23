@@ -79,22 +79,10 @@ function update() {
 	link.exit().remove();
 
 	// Update the nodes…
-	node = svg.selectAll("circle.node")
-		.data(nodes, function(d) { return d.id; })
-		.style("fill", color)
-
-	node.transition()
-		.attr("r", radius);
-
-	// Enter any new nodes.
-	node.enter()
-		.append("svg:circle")
+	node = svg.selectAll(".node")
+		.data(nodes)
+		.enter().append("g")
 		.attr("class", "node")
-		.attr("cx", function(d) { return d.x; })
-		.attr("cy", function(d) { return d.y; })
-		.attr("r", radius)
-		.style("fill", color)
-		.on("click", click)
 		.call(force.drag)
 		.on('mouseout', function(d){
 			tip.hide(d);
@@ -104,8 +92,14 @@ function update() {
 			examples(d);
 		});
 
-	// Exit any old nodes.
-	node.exit().remove();
+	node.append("circle")	
+		.attr("r", 10)
+		.style("fill", color);
+
+	node.append("text")
+    	.attr("dy", 10 + 15)
+    	.attr("text-anchor", "middle")
+    	.text(findNodeWord);
 
 }
 
@@ -115,8 +109,7 @@ function tick() {
 		.attr("x2", function(d) { return d.target.x; })
 		.attr("y2", function(d) { return d.target.y; });
 
-	node.attr("cx", function(d) { return d.x; })
-		.attr("cy", function(d) { return d.y; });
+	node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 }
 
 
@@ -131,6 +124,16 @@ function examples(d) {
 	$.each(d.examples, function( key, value ) {
 		$('.examples').append("<li>" + toTitleCase(value.example) + "</li>");
 	});
+}
+
+function findNodeWord(d) {
+	var $nodeWord = d.word;    	
+	if($nodeWord.indexOf("_") > 0){
+		$newNodeWord = $nodeWord.replace(/_/g, ' ');
+		return $newNodeWord;
+	}else{
+		return $nodeWord;
+	}
 }
 
 
@@ -169,17 +172,6 @@ function click(d) {
 	updateGraph(jsonURL);
 }
 
-//Changes the radius of the circle based of the identifier
-function radius(d) {
-	switch(d.identifier) {
-		case 'word-hypernym': //adverb
-			return "20";
-			break;
-		default:
-			return "10";
-	}
-}
-
 // Returns a list of all nodes under the root.
 function flatten(root) {
 	var nodes = [], i = 0;
@@ -194,19 +186,6 @@ function flatten(root) {
 	root.size = recurse(root);
 	return nodes;
 
-}
-
-
-//Update graph with new extended JSON objects
-function updateGraph(newURL) {
-	d3.json(newURL, function(json) {
-		root = json.words[0]; //set root node
-		root.fixed = true;
-		root.x = w / 2;
-		root.y = h / 2 - 80;
-		update();
-	 	jsonTextArea(newURL);
-	});
 }
 
 //Add json to textarea
