@@ -249,20 +249,6 @@ refresh();
 ****** SEARCH *******
 ********************/
 
-$('.login header span').click(function (){
-	hideSearch();
-});
-
-function showSearch() {
-	$('.login').removeClass('hide');
-	$('.overlay').removeClass('hide');
-}
-
-function hideSearch() {
-	$('.login').addClass('hide');
-	$('.overlay').addClass('hide');
-}
-
 function getUrlParameter(sParam)
 {
     var sPageURL = window.location.search.substring(1);
@@ -272,13 +258,10 @@ function getUrlParameter(sParam)
         var sParameterName = sURLVariables[i].split('=');
         if (sParameterName[0] == sParam) 
         {
-            if (sParameterName[1] != ''){
-            	hideSearch();
-            }
             return sParameterName[1];
         }
     }
-} } 
+} 
 
 $('#search-submit').click(function(){
 	localStorage.removeItem('testObject');
