@@ -170,6 +170,7 @@ function click(d) {
 	console.log(jsonURL);
 	previousOffset = $offsetClicked;
 	updateGraph(jsonURL);
+	saveItem(d.word);
 }
 
 // Returns a list of all nodes under the root.
@@ -198,6 +199,29 @@ function jsonTextArea(newURL){
 function toTitleCase(str){
     return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
 }
+
+var breadcrumbArray = [];
+
+function refresh(){
+	results.innerHTML = '';
+
+	if  (localStorage.getItem('testObject') !== null) {
+		breadcrumbArray =  JSON.parse(localStorage.getItem('testObject'));
+
+		for (var i = 0; i < breadcrumbArray.length; i++) {
+			results.innerHTML += '<li class="list-group-item" style="background-color: #333;">' + breadcrumbArray[i] + ' </li>';
+		}	
+	}
+	
+}	
+
+function saveItem(text){
+	breadcrumbArray.push(text);	
+	localStorage.setItem('testObject', JSON.stringify(breadcrumbArray));
+	refresh();
+}
+
+refresh();
 
 
 
