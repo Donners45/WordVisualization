@@ -100,7 +100,6 @@ function update() {
 			tip.show(d);
 			examples(d);
 		})
-		.call(force.drag)
 		.style("fill", color);
 
 	nodeG.append("text")
