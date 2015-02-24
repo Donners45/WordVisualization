@@ -79,18 +79,18 @@ span {
 .d3-tip {
 	display: inline-block;
 	color: white;
-	background: rgba(0,0,0,0.7);
+	background: rgba(0, 0, 0, 0.7);
 	border-radius: 30px;
-	padding: 0 20px;
-	height: 30px;
-	line-height: 30px;
+	padding: 10px 20px;
+	max-width: 200px;
+	line-height: 16px;
 	position: relative;
-	text-transform:capitalize;
+	text-transform: capitalize;
 }
 
 .examples {
 	position: absolute;
-	top: 20px;
+	bottom: 20px;
 	right: 20px;
 	margin: 0;
 	padding: 0;
@@ -118,5 +118,47 @@ span {
 		&:nth-child(odd) {
 			background: #fafafa;
 		}
+	}
+}
+
+
+ul#breadcrumb {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	margin: 0;
+	padding: 0;
+	max-height: 400px;
+	max-width: 300px;
+	list-style-type: none;
+	text-align: center;
+	margin:10px;
+	@include border-radius(15px);
+	text-align: left;
+	overflow-y: scroll;
+
+	li {
+		background: white;
+		margin: 0;
+		padding: 0;
+		display: block;
+
+		&:nth-child(even) {
+			background: #fafafa;
+		}
+
+		&.header {
+			background: transparent;
+			text-align: center;
+			font-size: 16px;
+			color: white;
+		}
+	}
+
+	a {
+		display: block;
+		text-decoration: none;
+		font-family:Arial;
+		padding: 10px 20px 10px 10px;
 	}
 }

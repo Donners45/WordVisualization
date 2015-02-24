@@ -224,6 +224,24 @@ module.exports = function(grunt) {
 			}
 		},
 
+		jslint: { // configure the task
+		// lint your project's client code
+			client: {
+				src: [
+					'dist/assets/scripts/*.js'
+				],
+				exclude: [
+					'dist/assets/scripts/thirdparty/**/*.js'
+				],
+				directives: {
+					browser: true,
+					predef: [
+						'jQuery'
+					]
+				}
+			}
+		},
+
 		// uncss: {
 		// 	dist: {
 		// 		options: {
@@ -259,6 +277,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-ftp-deploy');
 	grunt.loadNpmTasks('grunt-csscomb');
+	grunt.loadNpmTasks('grunt-jslint');
 	// grunt.loadNpmTasks('grunt-uncss');
 
 	grunt.registerTask('server', [
