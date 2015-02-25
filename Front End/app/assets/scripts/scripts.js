@@ -78,7 +78,10 @@ function update() {
         .attr("x1", function (d) { return d.source.x; })
         .attr("y1", function (d) { return d.source.y; })
         .attr("x2", function (d) { return d.target.x; })
-        .attr("y2", function (d) { return d.target.y; });
+        .attr("y2", function (d) { return d.target.y; })
+        .style("fill", "none")
+        .style("stroke", "#bbb")
+        .style("stroke-width", "1.5px");
 
     // Exit any old links.
     link.exit().remove();
@@ -92,7 +95,8 @@ function update() {
     
     var nodeG = nodeE.append("g")
         .attr("class", "node")
-        .call(force.drag);
+        .call(force.drag)
+        .style("cursor", "pointer");
 
     nodeG.append("circle")  
         .attr("r", 10)
@@ -104,12 +108,18 @@ function update() {
             tip.show(d);
             examples(d);
         })
-        .style("fill", color);
+        .style("fill", color)
+        .style("stroke", "#34495e")
+        .style("stroke-width", "2px")
+        .style("box-sizing", "border-box")
+        .style("stroke-location", "inside");
 
     nodeG.append("text")
         .attr("dy", 10 + 15)
         .attr("text-anchor", "middle")
-        .text(function (d) { return correctlyFormat(d.word); });
+        .text(function (d) { return correctlyFormat(d.word); })
+        .style("font-size", "11px")
+        .style("color", "#000");
 
     node.exit().remove();
 
@@ -243,6 +253,37 @@ function bcSearch(word){
 }
 
 refresh();
+
+$("#save").on("click", function(){
+  var html = d3.select("svg")
+        .attr("version", 1.1)
+        .attr("xmlns", "http://www.w3.org/2000/svg")
+        .node().parentNode.innerHTML;
+
+  //console.log(html);
+  var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
+  var img = '<img src="'+imgsrc+'">'; 
+  d3.select("#svgdataurl").html(img);
+
+
+  var canvas = document.querySelector("canvas"),
+      context = canvas.getContext("2d");
+
+  var image = new Image;
+  image.src = imgsrc;
+  image.onload = function() {
+      context.drawImage(image, 0, 0);
+
+      var canvasdata = canvas.toDataURL("image/png");
+
+      var a = document.createElement("a");
+      a.download = "sample.png";
+      a.href = canvasdata;
+          document.body.appendChild(a);
+      a.click();
+  };
+
+});
 
 
 
