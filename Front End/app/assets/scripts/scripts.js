@@ -88,7 +88,7 @@ function update() {
 
     // Update the nodes…
     node = svg.selectAll(".node")
-        .data(nodes, function(d) { return d.word; });
+        .data(nodes, function(d) { return d });
     
     var nodeE = node
         .enter();
