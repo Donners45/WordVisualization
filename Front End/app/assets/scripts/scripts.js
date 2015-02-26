@@ -178,7 +178,6 @@ function click(d) {
     $group = d.group;
     $wordClicked = d.word;
     var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordClicked;
-    console.log(jsonURL);
     previousOffset = $offsetClicked;
     updateGraph(jsonURL);
     saveItem(d.word);
@@ -211,7 +210,6 @@ function jsonTextArea(newURL){
 
 //Update graph with new extended JSON objects
 function updateGraph(newURL) {
-    console.log(newURL);
     d3.json(newURL, function(json) {
         root = json.words[0]; //set root node
         root.fixed = true;
@@ -244,12 +242,12 @@ function saveItem(text){
 }
 
 function bcSearch(word){
-    console.log(word);
 
     var newURL = $.query.set("wordSearch", word).toString();
     window.history.pushState("", "", newURL);
 
-    console.log(newURL);
+    
+    saveItem(correctlyFormat(word));
     updateGraph(simpleJsonURL + word);
 
 }
@@ -262,7 +260,6 @@ $("#save").on("click", function(){
         .attr("xmlns", "http://www.w3.org/2000/svg")
         .node().parentNode.innerHTML;
 
-  //console.log(html);
   var imgsrc = 'data:image/svg+xml;base64,'+ btoa(html);
   var img = '<img src="'+imgsrc+'">'; 
   d3.select("#svgdataurl").html(img);
