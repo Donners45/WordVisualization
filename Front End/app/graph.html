@@ -20,18 +20,20 @@
 			</form>
 		</header>
 
-		<nav>
+		<nav id="primary_nav_wrap">
 			<ul>
-				<li><a href="index.html">Home</a></li>
-				<li><a href="">Favourites</a></li>
-				<li><a id="save">Print</a></li>
-				<li><a href="">Settings</a></li>
+				<li class="current-menu-item"><a href="#">Home</a></li>
+				<li><a href="#">History</a>
+					<ul id="breadcrumb"></ul>
+				</li>
+				<li><a id="save">Screenshot</a></li>
+				<li><a href="#">Settings</a></li>
 			</ul>
 		</nav>
 
-	<div id="svg"></div>
+		<div id="svg"></div>
 
-	<canvas width="960" height="960" style="display:none"></canvas>
+		<canvas width="960" height="960" style="display:none"></canvas>
 
 
 
@@ -41,8 +43,6 @@
 
 			<ul class="examples">
 			</ul>
-
-			<ul id="breadcrumb"></ul>
 
 			<ul class="node-key">
 				<li><span class="noun"></span>Noun</li>
