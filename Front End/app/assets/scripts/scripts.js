@@ -17,14 +17,14 @@ var w = 960,
     title,
     previousOffset = 0;
 
-var simpleJsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/';
-var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordToSearch;
+var simpleJsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/basic/';
+var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/basic/' + $wordToSearch;
 
 jsonTextArea(jsonURL);
 
 d3.json(jsonURL, function (json) {
     root = json.words[0]; //set root node
-    root.fixed = true;
+    root.fixed = false;
     root.x = w / 2;
     root.y = h / 2 - 80;
     update();
@@ -88,7 +88,7 @@ function update() {
 
     // Update the nodes…
     node = svg.selectAll(".node")
-        .data(nodes);
+        .data(nodes, function(d) { return d.word; });
     
     var nodeE = node
         .enter();
@@ -124,6 +124,9 @@ function update() {
         .style("color", "#000");
 
     node.exit().remove();
+    
+    svg.selectAll("text").data(nodes).exit().remove();
+    svg.selectAll("circle").data(nodes).exit().remove();
 
 }
 
@@ -174,14 +177,15 @@ function color(d) {
 
 //Request extended JSON objects when clicking a clickable node
 function click(d) {
-    $offsetClicked = d.offset;
-    $group = d.group;
     $wordClicked = d.word;
+
     var jsonURL = 'http://desolate-taiga-6759.herokuapp.com/word/' + $wordClicked;
-    previousOffset = $offsetClicked;
+
     updateGraph(jsonURL);
     saveItem(d.word);
+
     var newURL = $.query.set("wordSearch", d.word).toString();
+
     window.history.pushState("", "", newURL);
 }
 
