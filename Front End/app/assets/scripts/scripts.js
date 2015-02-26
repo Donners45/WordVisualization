@@ -105,7 +105,9 @@ function update() {
             tip.hide(d);
         })
         .on('mouseover', function (d) {
-            tip.show(d);
+            if(typeof d.definition != 'undefined'){
+                tip.show(d);
+            }
             examples(d);
         })
         .style("fill", color)
