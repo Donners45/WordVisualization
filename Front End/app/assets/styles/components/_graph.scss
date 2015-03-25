@@ -1,0 +1,100 @@
+ul.node-key {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 20px;
+	text-align: left;
+	left: 20px;
+
+	li {
+		display: block;
+		vertical-align: top;
+	}
+}
+
+span {
+	height: 12px;
+	width: 12px;
+	border: 2px solid #34495e;
+	display: inline-block;
+	margin-right: 10px;
+	border-radius: 100%;
+}
+
+.adverb {
+	background: #e74c3c;
+}
+
+.noun {
+	background: #3498db;
+}
+
+.verb {
+	background: #2ecc71;
+}
+
+.adjective{
+	background: #e78229;
+}
+
+.collapsed {
+	background: #95a5a6;
+}
+
+.graph-container {
+	position: relative;
+	overflow: hidden;
+}
+
+.graph {
+	display: block;
+
+	svg {
+		display: block;
+	}
+}
+
+.d3-tip {
+	display: inline-block;
+	color: white;
+	background: rgba(0, 0, 0, 0.7);
+	border-radius: 30px;
+	padding: 10px 20px;
+	max-width: 200px;
+	line-height: 16px;
+	position: relative;
+	text-transform: capitalize;
+}
+
+.examples {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	border: 1px solid black;
+	width: 400px;
+	text-align: left;
+	font-size: 11px;
+
+	li {
+		display: block;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid black;
+		padding: 5px;
+
+		&:last-child {
+			border: none;
+		}
+
+		&:nth-child(even) {
+			background: white;
+		}
+
+		&:nth-child(odd) {
+			background: #fafafa;
+		}
+	}
+}

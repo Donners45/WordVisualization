@@ -1,0 +1,86 @@
+@import "compass/";
+
+@import "helpers/_mixins.scss";
+@import "helpers/_variables.scss";
+
+@import "base/_normalize.scss";
+@import "base/_typography.scss";
+
+@import "components/_header.scss";
+@import "components/_graph.scss";
+
+// @import "compass/utilities/sprites";
+// @import "icons/*.png";
+// @include all-icons-sprites;
+
+// @include centre;
+// @include clearfix;
+// background: shade(red, 10%);
+// @include clearfix;
+// @include bp(tablet) {
+// 	clear: none;
+// }
+// @include icons-sprite(youtube_icon-hover);
+// @include rem(margin-bottom, 40px);
+
+$elements: overlay, login;
+
+a {
+	cursor: pointer;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	background: white;
+	height: 100%;
+}
+
+input {
+	padding: 5px 10px;
+	box-sizing: border-box;
+	@include border-radius(100px);
+	border: 1px solid #ccc;
+	outline: none;
+
+	&:focus, textarea:focus {
+		box-shadow: 0 0 5px #004b9a;
+		border: 1px solid #004b9a;
+	}
+
+	&[type=submit] {
+		background: #004b9a;
+		color: white;
+		border: none;
+		@include transition(0.25s ease background);
+
+		&:hover {
+			background: #004b9a;
+		}
+	}
+}
+
+.index {
+	form {
+		float: none;
+	}
+}
+
+.container {
+	min-height: 100%;
+	width: 960px;
+	text-align: center;
+	background: #F2F2F2;
+	margin: 0 auto;
+	border: 0px;
+	border-left: 5px solid #004b9a;
+	border-right: 5px solid #004b9a;
+	display: table;
+}
+
+.inner {
+	display: table-cell;
+	vertical-align: middle;
+}

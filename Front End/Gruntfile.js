@@ -202,7 +202,8 @@ module.exports = function(grunt) {
 		processhtml: {
 			dist: {
 				files: {
-					'dist/index.html': ['app/index.html']
+					'dist/index.html': ['app/index.html'],
+					'dist/graph.html': ['app/graph.html']
 				}
 			}
 		},
@@ -220,6 +221,24 @@ module.exports = function(grunt) {
 				files: {
 					'dist/assets/styles/main.css': ['dist/assets/styles/main.css'],
 				},
+			}
+		},
+
+		jslint: { // configure the task
+		// lint your project's client code
+			client: {
+				src: [
+					'dist/assets/scripts/*.js'
+				],
+				exclude: [
+					'dist/assets/scripts/thirdparty/**/*.js'
+				],
+				directives: {
+					browser: true,
+					predef: [
+						'jQuery'
+					]
+				}
 			}
 		},
 
@@ -242,7 +261,7 @@ module.exports = function(grunt) {
 					authKey: 'key1'
 				},
 				src: 'dist/',
-				dest: '/public_html/wordvisualization'
+				dest: '/public_html/wordvisualization_basic'
 			}
 		}
 
@@ -258,6 +277,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-ftp-deploy');
 	grunt.loadNpmTasks('grunt-csscomb');
+	grunt.loadNpmTasks('grunt-jslint');
 	// grunt.loadNpmTasks('grunt-uncss');
 
 	grunt.registerTask('server', [
