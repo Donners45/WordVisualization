@@ -1,3 +1,18 @@
+
+circle.node {
+	cursor: pointer;
+	stroke: #34495e;
+	stroke-width: 2px;
+	box-sizing: border-box;
+	stroke-location: inside;
+}
+
+line.link {
+	fill: none;
+	stroke: #34495e;
+	stroke-width: 1.5px;
+}
+
 ul.node-key {
 	margin: 0;
 	padding: 0;
